@@ -1,7 +1,7 @@
 {
   "name": "@lode/utils",
   "version": "0.0.1",
-  "description": "",
+  "description": "js utils",
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack --mode development",
@@ -13,7 +13,7 @@
     "@lode/utils",
     "lode-utils"
   ],
-  "author": "ycl",
+  "author": "silencelog",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.41",
