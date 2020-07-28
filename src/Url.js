@@ -11,8 +11,8 @@
  * @return {String}      [description]
  */
 function formatParams (o, j = '&') {
-  let arr = []
-  for (let key in o) {
+  const arr = []
+  for (const key in o) {
     if (!o[key] && o[key] !== 0) continue
     arr.push(encodeURIComponent(key) + '=' + encodeURIComponent(JSON.stringify(o[key])))
   }
@@ -26,7 +26,7 @@ function formatParams (o, j = '&') {
  * @return {String}      [参数值]
  */
 function getQueryString (name, param = {}) {
-  let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
   let result = ''
   let url = ''
   if (!param.url) {
@@ -36,16 +36,33 @@ function getQueryString (name, param = {}) {
   }
   result = url.match(reg)
   if (result !== null) {
-    let value = decodeURIComponent(result[2])
+    const value = decodeURIComponent(result[2])
     if (param.reg) {
-      let vreg = new RegExp(param.reg)
-      let val = value.match(vreg)
+      const vreg = new RegExp(param.reg)
+      const val = value.match(vreg)
       if (val !== null) return val[0]
       return null
     }
     return value
   }
   return null
+}
+
+/**
+ * [loadScript 异步加载script文件]
+ * @param  {[type]} o [description]
+ * @param  {String} j [description]
+ * @return {[type]}   [description]
+ */
+async function loadScript (url) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = url
+    script.onload = resolve
+    script.onerror = reject
+    const firstScript = document.getElementsByTagName('script')[0]
+    firstScript.parentNode.insertBefore(script, firstScript)
+  })
 }
 
 export { formatParams, getQueryString }

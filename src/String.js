@@ -48,6 +48,20 @@ function randomNumber (count) {
 }
 
 /**
+ * [generateMixed 取数组的值随机生成字符串]
+ * @param  {Number} count [description]
+ * @return {String}       [description]
+ */
+function generateMixed (len, arr = ['0','1','2','3','4','5','6','7','8','9']) {
+  let str = ''
+  for (let i = 0; i < len ; i ++) {
+     const id = Math.ceil(Math.random() * (arr.length - 1))
+     str += arr[id]
+   }
+  return str
+}
+
+/**
  * [trim 去空格]
  * @param  {String} str  [description]
  * @param  {Number} type [1-所有空格  2-前后空格  3-前空格 4-后空格（默认1）]

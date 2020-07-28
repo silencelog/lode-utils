@@ -4,7 +4,6 @@
  * @see module:Array
  */
 
-
 /**
  * [clone 深拷贝]
  * @param  {Array} a [description]
@@ -22,8 +21,8 @@ function clone (a) {
  */
 function unique (a, key) {
   if (key) {
-    let arr = []
-    let map = {}
+    const arr = []
+    const map = {}
     for (let i = 0; i < a.length; i++) {
       if (map[a[i][key]]) continue
       arr.push(a[i])
@@ -62,7 +61,7 @@ function randomOne (a) {
  */
 function reduce (a, fn, sum) {
   let value
-  let len = a.length >>> 0, i = 0, o = Object(a)
+  const len = a.length >>> 0; let i = 0; const o = Object(a)
   if (arguments.length >= 3) {
     value = arguments[2]
   } else {
@@ -91,10 +90,10 @@ function reduce (a, fn, sum) {
  * @return {Object}   [description]
  */
 function object (a, fn, children) {
-  let obj = {}
+  const obj = {}
   if (!fn) return obj
   if (typeof fn === 'string') {
-    let k = fn
+    const k = fn
     fn = function (o, v, i) {
       o[v[k]] = v
       return v
@@ -120,10 +119,10 @@ function object (a, fn, children) {
  * @return {Array}     [description]
  */
 function selected (a, k, eq = true) {
-  let arr = []
+  const arr = []
   if (!k) return arr
   for (let i = 0; i < (a.length >>> 0); i++) {
-    let item = a[i]
+    const item = a[i]
     if (item[k] === eq) arr.push(item)
   }
   return arr
@@ -140,7 +139,7 @@ function toggle (a, o, fn) {
   if (!o) return
   if (!fn || typeof fn !== 'function') fn = function (o, v) { return o === v }
   for (let i = 0; i < (a.length >>> 0); i++) {
-    let item = a[i]
+    const item = a[i]
     if (fn.bind(a, o, item, i)()) {
       a.splice(i, 1)
       return a
@@ -157,7 +156,7 @@ function toggle (a, o, fn) {
  * @return {Number}      [description]
  */
 function findIndex (a, fn) {
-  let len = a.length >>> 0
+  const len = a.length >>> 0
   if (typeof fn === 'function') {
     for (let i = 0; i < len; i++) {
       if (fn(a[i])) return i
@@ -192,7 +191,7 @@ function indexOf (a, s) {
  * @return {*}      [description]
  */
 function find (a, fn) {
-  let i = findIndex(a, fn)
+  const i = findIndex(a, fn)
   return i > 0 ? a[i] : null
 }
 
@@ -201,7 +200,7 @@ function find (a, fn) {
  * @return {Array} [description]
  */
 function combine () {
-  let arr = [].concat.apply([], arguments)
+  const arr = [].concat.apply([], arguments)
   return unique(arr)
 }
 
@@ -214,17 +213,17 @@ function combine () {
  * @return {Object}       [description]
  */
 function group (arr, field, sort) {
-  let obj = {}
+  const obj = {}
   if (!field) return obj
   for (let i = 0; i < arr.length; i++) {
     let item = arr[i]
-    if (item._$data){
+    if (item._$data) {
       item = item.toJSON()
     }
-    let v = obj [item[field]]
+    let v = obj[item[field]]
     if (!v) {
       v = []
-      obj [item[field]] = v
+      obj[item[field]] = v
     }
     v.push(item)
   }
@@ -240,7 +239,7 @@ function group (arr, field, sort) {
   } else {
     orderFn = sort
   }
-  for (let k in obj) {
+  for (const k in obj) {
     obj[k].sort((v1, v2) => {
       if (orderFn) {
         return orderFn.call(arr, v1, v2)
